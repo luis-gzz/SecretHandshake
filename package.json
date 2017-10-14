@@ -1,0 +1,25 @@
+{
+  "name": "secret",
+  "version": "0.1.0",
+  "private": true,
+  "homepage": "https://luis-gzz.github.io/SecretHandshake",
+  "dependencies": {
+    "gh-pages": "^1.0.0",
+    "material-components": "^0.3.0",
+    "muicss": "^0.9.27",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
+    "react-dropzone": "^4.2.0",
+    "react-scripts": "1.0.14",
+    "react-simpletabs": "^0.7.0",
+    "react-window-size": "^1.0.1"
+  },
+  "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}

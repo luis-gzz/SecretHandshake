@@ -49,6 +49,7 @@ class ImageUpload extends Component {
 
         fileReader.onload = (fileLoadedEvent) => {
             encodedImg = fileLoadedEvent.target.result;
+            console.log(this.state.key)
 
             let xhr = new XMLHttpRequest();
             xhr.open("POST", "http://localhost:3000/newImage", true);
@@ -57,9 +58,11 @@ class ImageUpload extends Component {
                 key: this.state.key,
                 image: encodedImg
             }));
+
+            this.setState({key:"",uploadedFiles:[]});
         };
 
-        this.setState({key:"",uploadedFiles:[]});
+
     }
 
     render() {

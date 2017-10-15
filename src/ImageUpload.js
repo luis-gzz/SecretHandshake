@@ -84,6 +84,7 @@ class ImageUpload extends Component {
                 floatingLabel={true}
                 rows = {1}
             />
+            <p>No more than 250kb. Platform not optomized.</p>
             <div className="DropZone" >
                 <Dropzone
                 multiple={false}

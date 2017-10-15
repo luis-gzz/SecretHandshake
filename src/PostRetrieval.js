@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './PostRetrieval.css';
 import Button from 'muicss/lib/react/button';
 import Textarea from 'muicss/lib/react/textarea';
+import download from 'downloadjs';
 
 
 class PostRetrieval extends Component {
@@ -28,7 +29,7 @@ class PostRetrieval extends Component {
         this.setState({key: ev.target.value});
     }
 
-    download(filename, text) {
+    downloadTxt(filename, text) {
         var pom = document.createElement('a');
         pom.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
         pom.setAttribute('download', filename);
@@ -44,13 +45,51 @@ class PostRetrieval extends Component {
     }
 
     downloadFiles() {
-        console.log("here")
+        //console.log("here")
 
         let userData = JSON.parse(this.state.response);
 
 
-        console.log(userData.Key);
-        this.download('Data.txt', userData.Key)
+        if (userData.Key.substring(0,10) === "data:image"){
+            let base64Image = userData.Key;
+            let fileType = "";
+            //console.log(userData.Key);
+            if((userData.Key.substring(11,14)).toLowerCase() === "png"){
+                fileType = "png";
+            } else if((userData.Key.substring(11,14)).toLowerCase() === "jpg"){
+                fileType = "jpg";
+            } else if((userData.Key.substring(11,14)).toLowerCase() === "gif"){
+                fileType = "gif";
+            } else if((userData.Key.substring(11,15)).toLowerCase() === "jpeg"){
+                fileType = "jpeg";
+            }
+            //console.log(base64Image);
+
+
+            let link = document.createElement("a");
+            link.download = "image." + fileType;
+            link.href = base64Image;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            //delete link;
+
+            // download(base64Image.substring(21, base64Image), "img." + fileType, "image/" + fileType);
+            //let finalDatum = atob(base64Image);
+            //console.log(finalDatum);
+            // create an image with the a given name ie 'image'
+
+        } else {
+            if (userData.Key === "") {
+                alert('Enter a valid key');
+            } else {
+                this.downloadTxt('Data.txt', userData.Key)
+            }
+
+        }
+
+        //console.log(userData.Key);
+
         this.setState({response:""})
     }
 
@@ -58,10 +97,13 @@ class PostRetrieval extends Component {
         console.log("Submit")
         var xhr = new XMLHttpRequest();
         xhr.onload = () => {
-            var status = xhr.status;
+            //var status = xhr.status;
             var data = xhr.responseText;
             //console.log(data);
-            this.setState({key:"",post:"", response:data});
+            if(data !== "") {
+                this.setState({key:"",post:"", response:data});
+            }
+
         }
 
         xhr.open("POST", "http://localhost:3000/retrieve", true);
@@ -75,7 +117,6 @@ class PostRetrieval extends Component {
 
     render() {
         if (this.state.response !== "") {
-
             this.downloadFiles();
         }
 
@@ -90,7 +131,8 @@ class PostRetrieval extends Component {
             />
 
             <Button onClick={this.onSubmit.bind(this)}
-                    color="danger">Retrieve</Button>
+                    color="danger">Retrieve
+            </Button>
 
             </div>);
     }

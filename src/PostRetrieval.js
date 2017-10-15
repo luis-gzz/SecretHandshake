@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './PostRetrieval.css';
 import Button from 'muicss/lib/react/button';
 import Textarea from 'muicss/lib/react/textarea';
-import download from 'downloadjs';
+//import download from 'downloadjs';
 
 
 class PostRetrieval extends Component {

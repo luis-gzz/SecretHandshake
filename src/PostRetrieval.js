@@ -15,10 +15,9 @@ class PostRetrieval extends Component {
         };
     }
 
-    componentWillMount() {
-        if (this.state.response !== "") {
-            this.downloadFiles();
-        }
+    componentDidMount() {
+
+
     }
 
     onChangePost(ev) {
@@ -29,28 +28,57 @@ class PostRetrieval extends Component {
         this.setState({key: ev.target.value});
     }
 
+    download(filename, text) {
+        var pom = document.createElement('a');
+        pom.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+        pom.setAttribute('download', filename);
+
+        if (document.createEvent) {
+            var event = document.createEvent('MouseEvents');
+            event.initEvent('click', true, true);
+            pom.dispatchEvent(event);
+        }
+        else {
+            pom.click();
+        }
+    }
+
     downloadFiles() {
+        console.log("here")
+
+        let userData = JSON.parse(this.state.response);
 
 
+        console.log(userData.Key);
+        this.download('Data.txt', userData.Key)
+        this.setState({response:""})
     }
 
     onSubmit() {
         console.log("Submit")
-        let xhr = new XMLHttpRequest();
+        var xhr = new XMLHttpRequest();
+        xhr.onload = () => {
+            var status = xhr.status;
+            var data = xhr.responseText;
+            //console.log(data);
+            this.setState({key:"",post:"", response:data});
+        }
+
         xhr.open("POST", "http://localhost:3000/retrieve", true);
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.send(JSON.stringify({
             key: this.state.key
         }));
 
-        if (xhr.readyState === 4)
-            if (xhr.status === 200)
-                var json_data = xhr.responseText;
 
-        this.setState({key:"",post:"", response: json_data});
     }
 
     render() {
+        if (this.state.response !== "") {
+
+            this.downloadFiles();
+        }
+
         return (
             <div className="TextUpload">
             <Textarea

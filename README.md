@@ -11,6 +11,10 @@ This repository is for the front end which was built in ReactJS and can be found
 The backend for the project was written using Golang and can be found at 
 
   https://github.com/luis-gzz/SecretHandshakeServer
+  
+The "Database"
+  
+   https://www.reddit.com/r/SecretHandshakeVault/
 
 The code for both the front and backend is very sloppy and includes many errors as it was written for a 36hr hackathon.
 

@@ -3,6 +3,7 @@ import logo from './handshake.svg';
 import './App.css';
 import ImageUpload from './ImageUpload.js';
 import TextUpload from './TextUpload.js';
+import PostRetrieval from './PostRetrieval.js';
 import Tabs from 'muicss/lib/react/tabs';
 import Tab from 'muicss/lib/react/tab';
 
@@ -18,6 +19,7 @@ class App extends Component {
             <Tabs onChange={this.onChange} defaultSelectedIndex={0}>
                 <Tab className="mui--text-black" value="pane-1" label="Text"><TextUpload/></Tab>
                 <Tab className="mui--text-black" value="pane-2" label="Image"><ImageUpload/></Tab>
+                <Tab className="mui--text-black" value="pane-3" label="Retrieve"><PostRetrieval/></Tab>
             </Tabs>
             </div>
         </div>

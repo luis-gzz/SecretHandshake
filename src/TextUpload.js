@@ -19,16 +19,25 @@ class TextUpload extends Component {
     }
 
     onSubmit() {
-        console.log("Submit")
-        let xhr = new XMLHttpRequest();
-        xhr.open("POST", "http://localhost:3000/newText", true);
-        xhr.setRequestHeader('Content-Type', 'application/json');
-        xhr.send(JSON.stringify({
-            key: this.state.key,
-            post: this.state.post
-        }));
+        if (this.state.key !== "" && this.state.post !== "") {
+            console.log("Submit")
+            let xhr = new XMLHttpRequest();
+            xhr.open("POST", "http://localhost:3000/newText", true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.send(JSON.stringify({
+                key: this.state.key,
+                post: this.state.post
+            }));
 
-        this.setState({key:"",post:""});
+            this.setState({key:"",post:""});
+
+        } else if (this.state.key !== "" && this.state.post === "") {
+            alert ("Please type a post and try again");
+        } else if (this.state.key === "" && this.state.post !== "") {
+            alert ("Please type a key and try again");
+        } else if (this.state.key === "" && this.state.post === "") {
+            alert ("Please type a key, type a post, and try again");
+        }
     }
 
 

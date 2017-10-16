@@ -56,15 +56,13 @@ class PostRetrieval extends Component {
             //console.log(userData.Key);
             if((userData.Key.substring(11,14)).toLowerCase() === "png"){
                 fileType = "png";
-            } else if((userData.Key.substring(11,14)).toLowerCase() === "jpg"){
-                fileType = "jpg";
             } else if((userData.Key.substring(11,14)).toLowerCase() === "gif"){
                 fileType = "gif";
-            } else if((userData.Key.substring(11,15)).toLowerCase() === "jpeg"){
-                fileType = "jpeg";
+            } else if (((userData.Key.substring(11,14)).toLowerCase() === "jpg")
+                    || ((userData.Key.substring(11,15)).toLowerCase() === "jpeg")) {
+                fileType = "jpg";
             }
-            //console.log(base64Image);
-
+            console.log(base64Image);
 
             let link = document.createElement("a");
             link.download = "image." + fileType;
@@ -72,12 +70,6 @@ class PostRetrieval extends Component {
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
-            //delete link;
-
-            // download(base64Image.substring(21, base64Image), "img." + fileType, "image/" + fileType);
-            //let finalDatum = atob(base64Image);
-            //console.log(finalDatum);
-            // create an image with the a given name ie 'image'
 
         } else {
             if (userData.Key === "") {

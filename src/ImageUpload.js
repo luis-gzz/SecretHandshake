@@ -61,6 +61,8 @@ class ImageUpload extends Component {
 
                 this.setState({key:"",uploadedFiles:[]});
             };
+
+
         } else if (this.state.key !== "" && this.state.uploadedFile.length === 0) {
             alert ("Please upload a file and try again");
             console.log(this.state.uploadedFile)

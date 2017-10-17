@@ -12,10 +12,8 @@ The backend for the project was written using Golang and can be found at
 
   https://github.com/luis-gzz/SecretHandshakeServer
   
-The "Database"
-  
-   https://www.reddit.com/r/SecretHandshakeVault/
+
 
 The code for both the front and backend is very sloppy and includes many errors as it was written for a 36hr hackathon.
 
-WARNING: Image uploading and downloading using the server is still buggy and not fully functioning.
+WARNING: Image uploading and downloading only tested with small files
